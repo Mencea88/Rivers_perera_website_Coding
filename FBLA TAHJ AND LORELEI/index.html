@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome</title>
+        <style>
+            /* Apply full height and remove margins */
+            html, body {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                background-color: #007bff;
+                justify-content: center; /* Horizontally center */
+                align-items: center; /* Vertically center */
+                font-family: Arial, sans-serif;
+            }
+
+            .banner {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                background-color: #FFD700; /* Yellow background */
+                text-align: center;
+                padding: 10px 0;
+                font-size: 2em;
+                font-weight: bold;
+                color: #333; /* Dark text */
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 3em; /* Optional: Adjust the size of the text */
+                margin-top: 50px;
+            }
+
+            /* Style the button container to position buttons at the bottom */
+            .button-container {
+                position: absolute;
+                bottom: 20px;
+                display: flex;
+                justify-content: space-between;
+                padding: 20px;
+                width: 100%;
+            }
+
+            /* Style for individual buttons */
+            button {
+                padding: 15px 30px;
+                font-size: 1.2em;
+                cursor: pointer;
+                border: none;
+                background-color: #4CAF50;
+                color: white;
+                border-radius: 5px;
+            }
+
+            button:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="banner">Sunrise Jobs</div>
+        <h1>Welcome</h1>
+        <div class="button-container">
+            <a href="new-job-posts.html">
+                <!-- Left Button: Employers -->
+                <button>Employers</button>
+            </a>
+
+            <!-- Right Button: Students -->
+            <a href="apply-new-jobs.html">
+                <button>Students</button>
+            </a>
+        </div>
+    </body>
+</html>

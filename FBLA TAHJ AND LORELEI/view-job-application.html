@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Job Applications</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+
+        .application-box {
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            background-color: #f9f9f9;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back to Job Posts Page -->
+    <button class="back-button" onclick="window.location.href='new-job-posts.html'">Back to Job Posts</button>
+
+    <h1>Job Applications</h1>
+
+    <div id="applications-container"></div>
+
+    <script>
+        // Retrieve applications from localStorage
+        const applications = JSON.parse(localStorage.getItem('applications')) || [];
+        const applicationsContainer = document.getElementById('applications-container');
+
+        // If there are applications, display them
+        if (applications.length > 0) {
+            applications.forEach(application => {
+                const applicationBox = document.createElement('div');
+                applicationBox.classList.add('application-box');
+                
+                applicationBox.innerHTML = `
+                    <h3>Application for: ${application.appliedFor}</h3>
+                    <p><strong>Name:</strong> ${application.name}</p>
+                    <p><strong>Age:</strong> ${application.age}</p>
+                    <p><strong>Experience:</strong> ${application.experience}</p>
+                `;
+                
+                applicationsContainer.appendChild(applicationBox);
+            });
+        } else {
+            applicationsContainer.innerHTML = "<p>No applications received yet.</p>";
+        }
+    </script>
+
+</body>
+</html>
