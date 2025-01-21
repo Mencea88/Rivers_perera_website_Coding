@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Job Posts</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+
+        .back-button, .create-job-button, .view-job-application-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .back-button:hover, .create-job-button:hover, .view-job-application-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Style for the create job button */
+        .create-job-button {
+            background-color: #007bff; /* Blue button color */
+        }
+
+        .create-job-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Style for the view job application button */
+        .view-job-application-button {
+            background-color: #ff9800; /* Orange button color */
+        }
+
+        .view-job-application-button:hover {
+            background-color: #e68900; /* Darker orange on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>New Job Posts</h1>
+
+    <!-- Back button to go back to the welcome page -->
+    <a href="index.html">
+        <button class="back-button">Back to Welcome Page</button>
+    </a>
+
+    <!-- Create New Job Posting Button -->
+    <a href="create-job-post.html">
+        <button class="create-job-button">Create New Job Posting</button>
+    </a>
+
+    <!-- View Job Applications Button -->
+    <a href="view-job-application.html">
+        <button class="view-job-application-button">View Job Applications</button>
+    </a>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Job Posting</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            padding: 10px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create New Job Posting</h1>
+
+    <!-- Job Posting Form -->
+    <form id="job-post-form">
+        <label for="business-name">Business Name:</label>
+        <input type="text" id="business-name" name="business-name" required>
+
+        <label for="job-title">Job Title:</label>
+        <input type="text" id="job-title" name="job-title" required>
+
+        <label for="starting-salary">Starting Salary:</label>
+        <input type="number" id="starting-salary" name="starting-salary" required>
+
+        <label for="requirements">Requirements:</label>
+        <textarea id="requirements" name="requirements" required></textarea>
+
+        <button type="submit">Submit Job Posting</button>
+    </form>
+
+    <!-- Back Button to New Job Posts Page -->
+    <a href="new-job-posts.html">
+        <button class="back-button">Back to New Job Posts</button>
+    </a>
+
+    <script>
+        // Handle the form submission
+        document.getElementById('job-post-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            // Get the values from the form fields
+            const businessName = document.getElementById('business-name').value;
+            const jobTitle = document.getElementById('job-title').value;
+            const startingSalary = document.getElementById('starting-salary').value;
+            const requirements = document.getElementById('requirements').value;
+
+            // Create a job object
+            const jobPost = {
+                businessName,
+                jobTitle,
+                startingSalary,
+                requirements,
+                datePosted: new Date().toISOString()  // Store the posting time
+            };
+
+            // Retrieve existing job posts from localStorage or initialize an empty array
+            let jobPosts = JSON.parse(localStorage.getItem('jobPosts')) || [];
+
+            // Add the new job post to the array
+            jobPosts.unshift(jobPost);  // Use unshift to add to the beginning (newest first)
+
+            // Store the updated job posts array back into localStorage
+            localStorage.setItem('jobPosts', JSON.stringify(jobPosts));
+
+            // Redirect to apply-new-jobs.html to view the job postings
+            window.location.href = 'apply-new-jobs.html';
+        });
+    </script>
+</body>
+</html>
