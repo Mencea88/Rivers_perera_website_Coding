@@ -8,60 +8,67 @@
         html, body {
             height: 100%;
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            background-color: #007bff;
+            align-items: center;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            color: #fff;
             text-align: center;
             padding: 20px;
         }
 
         h1 {
-            font-size: 3em;
-            margin-bottom: 30px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .job-box {
-            border: 2px solid #007bff;
-            border-radius: 5px;
+            border: none;
+            border-radius: 10px;
             padding: 20px;
             margin: 20px auto;
-            width: 80%;
+            width: 90%;
             max-width: 600px;
-            background-color: #f9f9f9;
+            background: #fff;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
-        .back-button {
-            padding: 10px 20px;
+        .job-box:hover {
+            transform: scale(1.05);
+        }
+
+        .back-button, .apply-button {
+            padding: 12px 20px;
             font-size: 16px;
-            background-color: #2a902b;
-            color: rgb(22, 22, 20);
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .back-button {
+            background: #28a745;
+            color: white;
             margin-bottom: 20px;
         }
 
         .back-button:hover {
-            background-color: #45a049;
+            background: #218838;
         }
 
         .apply-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
+            background: #007bff;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
         .apply-button:hover {
-            background-color: #0056b3;
+            background: #0056b3;
         }
 
-        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -69,29 +76,31 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             justify-content: center;
             align-items: center;
         }
 
         .modal-content {
-            background-color: white;
+            background: white;
             padding: 20px;
-            border-radius: 5px;
-            width: 80%;
+            border-radius: 8px;
+            width: 90%;
             max-width: 500px;
             text-align: left;
+            color: #333;
         }
 
         .modal-content label {
             display: block;
-            margin: 10px 0 5px;
+            margin-top: 10px;
+            font-weight: bold;
         }
 
         .modal-content input, .modal-content textarea {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -99,7 +108,7 @@
         .modal-content button {
             margin-top: 10px;
             padding: 10px 20px;
-            background-color: #007bff;
+            background: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
@@ -107,61 +116,51 @@
         }
 
         .modal-content button:hover {
-            background-color: #0056b3;
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
 
-    <!-- Back to Welcome Button -->
     <button class="back-button" onclick="window.location.href='index.html'">Back to Welcome</button>
-
     <h1>Apply for New Jobs</h1>
-
     <div id="job-container"></div>
 
-    <!-- Modal for Application Form -->
     <div class="modal" id="application-modal">
         <div class="modal-content">
             <h2>Apply for <span id="job-title"></span></h2>
             <form id="application-form">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
-
+                
                 <label for="age">Age:</label>
                 <input type="number" id="age" name="age" required>
-
+                
                 <label for="experience">Experience:</label>
                 <textarea id="experience" name="experience" rows="4" required></textarea>
-
+                
                 <button type="button" id="submit-application">Submit</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Retrieve all job postings from localStorage
         const jobPosts = JSON.parse(localStorage.getItem('jobPosts')) || [];
-
-        // Get references to the job container and modal
         const jobContainer = document.getElementById('job-container');
         const modal = document.getElementById('application-modal');
         const jobTitleSpan = document.getElementById('job-title');
         const applicationForm = document.getElementById('application-form');
 
-        // Function to open the modal
         function openModal(jobTitle) {
             jobTitleSpan.textContent = jobTitle;
             modal.style.display = 'flex';
         }
 
-        // Function to close the modal
         function closeModal() {
             modal.style.display = 'none';
             applicationForm.reset();
         }
 
-        // Display job postings
         if (jobPosts.length > 0) {
             jobPosts.forEach(jobPost => {
                 const jobBox = document.createElement('div');
@@ -187,7 +186,6 @@
             jobContainer.innerHTML = "<p>No job postings available.</p>";
         }
 
-        // Handle form submission
         document.getElementById('submit-application').onclick = () => {
             const formData = new FormData(applicationForm);
             const applicantData = {
@@ -197,22 +195,18 @@
                 appliedFor: jobTitleSpan.textContent
             };
 
-            // Store the application in localStorage
             let applications = JSON.parse(localStorage.getItem('applications')) || [];
             applications.push(applicantData);
             localStorage.setItem('applications', JSON.stringify(applications));
 
-            // Redirect to the view-job-application.html page
             window.location.href = 'view-job-application.html';
         };
 
-        // Close modal when clicking outside of it
         window.onclick = event => {
             if (event.target === modal) {
                 closeModal();
             }
         };
     </script>
-
 </body>
 </html>
